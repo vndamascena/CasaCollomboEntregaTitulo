@@ -24,7 +24,8 @@ namespace EntregaTitulo.Domain.Entities
         public string?  Motorista { get; set; }
         public string? DataEntrega { get; set; }
         public DateTime? DataCadastro { get; set; }
-        public string? MotoristaAtual {  get; set; }
+        public string? MotoristaAtual { get; set; }
+        public string? Pagamento { get; set; }
 
         public List<BaixaEntrega> BaixaEntregas { get; set; }
         public List<PendenciaEntrega> PendenciaEntregas { get; set; }

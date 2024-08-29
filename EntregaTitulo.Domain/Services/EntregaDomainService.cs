@@ -59,6 +59,7 @@ namespace EntregaTitulo.Domain.Services
                 UsuarioId = registro.UsuarioId,
                 Vendedor = registro.Vendedor,
                 Loja = registro.Loja,
+                Pagamento = registro.Pagamento,
 
 
 
@@ -98,6 +99,7 @@ namespace EntregaTitulo.Domain.Services
                 UsuarioId = registro.UsuarioId,
                 Vendedor = registro.Vendedor,
                 Loja = registro.Loja,
+                Pagamento = registro.Pagamento,
 
 
 
@@ -135,7 +137,7 @@ namespace EntregaTitulo.Domain.Services
                 DataCadastro = registro.DataCadastro,
                 UsuarioId = registro.UsuarioId,
                 Loja = registro.Loja,
-
+                Pagamento = registro.Pagamento,
 
 
             };
@@ -190,6 +192,7 @@ namespace EntregaTitulo.Domain.Services
                 Periodo = entrega.Periodo,
                 DataTime = DateTime.Now,
                 Loja = entrega.Loja,
+                Pagamento = entrega.Pagamento,
             };
             _baixaEntregaRepository.Add(baixaEntrega);
 
@@ -353,6 +356,7 @@ namespace EntregaTitulo.Domain.Services
                 DataEntregaProximaEntrega = dataEntregaProximaEntrega,
                 DiaSemanaPendencia = diaSemanaPendencia,
                 Loja = entrega.Loja,
+                Pagamento = entrega.Pagamento,
             };
 
             _pendenciaEntregaRepository.Add(pendenciaEntrega);

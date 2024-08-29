@@ -36,6 +36,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(v => v.DataEntregaProximaEntrega).HasColumnName("DIASEMANAPENDENCIA");
             builder.Property(v => v.DiaSemanaPendencia).HasColumnName("PROXIMAENTREGA");
             builder.Property(v => v.Loja).HasColumnName("LOJA");
+            builder.Property(e => e.Pagamento).HasColumnName("PAGAMENTO");
 
             builder.HasOne(e => e.Entrega)
                 .WithMany()

@@ -27,5 +27,6 @@ namespace EntregaTitulo.Services.Model.EntregaModel.Entrega
         public string? MotoristaAtual { get; set; }
         public string? Motorista {  get; set; }
         DateTime? DataEntrada { get; set; }
+        public string? Pagamento { get; set; }
     }
 }

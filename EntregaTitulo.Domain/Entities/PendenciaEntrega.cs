@@ -27,7 +27,7 @@ namespace EntregaTitulo.Domain.Entities
         public DateTime DataTime { get; set; }
         public string? Loja { get; set; }
         public string? DataEntregaProximaEntrega { get; set; }
-
+        public string? Pagamento { get; set; }
         public string? DiaSemanaPendencia { get; set; }
         public Entrega? Entrega { get; set; }
     }

@@ -19,6 +19,7 @@
         public string? UsuarioId { get; set; }
         public DateTime DataTime { get; set; }
         public string? Loja { get; set; }
+        public string? Pagamento { get; set; }
 
         public string? DataEntregaProximaEntrega { get; set; }
 
