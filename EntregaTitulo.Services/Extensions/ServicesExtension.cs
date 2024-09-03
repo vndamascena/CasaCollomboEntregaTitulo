@@ -20,6 +20,7 @@ namespace EntregaTitulo.Services.Extensions
            
             services.AddTransient<IBaixaEntregaRepository, BaixaEntregaRepository>();
             services.AddTransient<IImpressaoRepository, ImpressaoRepository>();
+            services.AddTransient<IPagamentoRepository, PagamentoRepository>();
 
 
         }

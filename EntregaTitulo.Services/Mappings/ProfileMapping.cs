@@ -3,11 +3,12 @@ using EntregaTitulo.Domain.Entities;
 using EntregaTitulo.Services.Model.EntregaModel.BaixaEntrega;
 using EntregaTitulo.Services.Model.EntregaModel.Entrega;
 using EntregaTitulo.Services.Model.EntregaModel.Impressao;
+using EntregaTitulo.Services.Model.EntregaModel.Pagamento;
 using EntregaTitulo.Services.Model.EntregaModel.PendenciaEntrega;
 
 namespace EntregaTitulo.Services.Mappings
 {
-    public class ProfileMapping: Profile
+    public class ProfileMapping : Profile
     {
         public ProfileMapping()
         {
@@ -21,10 +22,10 @@ namespace EntregaTitulo.Services.Mappings
             CreateMap<BaixaEntregaPostModel, BaixaEntrega>()
                 .AfterMap((model, entity) =>
                 {
-                    entity.DataTime = DateTime.Now; 
+                    entity.DataTime = DateTime.Now;
                 });
             CreateMap<PendenciaEntregaPostModel, PendenciaEntrega>()
-                
+
                 .AfterMap((model, entity) =>
                 {
                     entity.DataTime = DateTime.Now;
@@ -34,16 +35,24 @@ namespace EntregaTitulo.Services.Mappings
                 {
                     entity.DataTime = DateTime.Now;
                 });
-
+            CreateMap<PagamentoPostModel, Pagamento>()
+               .AfterMap((model, entity) =>
+               {
+                   entity.DataTime = DateTime.Now;
+               });
 
             CreateMap<Entrega, EntregaGetModel>();
             CreateMap<EntregaGetModel, Entrega>();
             CreateMap<EntregaPutModel, Entrega>();
             CreateMap<Entrega, EntregaPutModel>();
-            CreateMap<BaixaEntrega, BaixaEntregaGetModel>(); 
+            CreateMap<BaixaEntrega, BaixaEntregaGetModel>();
             CreateMap<PendenciaEntrega, PendenciaEntregaGetModel>();
             CreateMap<Impressao, ImpressaoGetModel>();
             CreateMap<ImpressaoGetModel, Impressao>();
+            CreateMap<PagamentoGetModel, Pagamento>();
+            CreateMap<Pagamento, PagamentoGetModel>();
+
+
         }
     }
 }

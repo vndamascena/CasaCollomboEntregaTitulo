@@ -33,7 +33,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(e => e.Periodo).HasColumnName("PERIODO").IsRequired();
             builder.Property(v => v.Loja).HasColumnName("LOJA");
             builder.Property(e => e.Vendedor).HasColumnName("VENDEDOR");
-            builder.Property(e => e.Pagamento).HasColumnName("PAGAMENTO");
+           
 
             builder.HasOne(e => e.Entrega)
                 .WithMany()

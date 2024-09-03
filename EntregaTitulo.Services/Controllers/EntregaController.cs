@@ -12,6 +12,7 @@ using EntregaTitulo.Services.Model.EntregaModel.Entrega;
 using EntregaTitulo.Services.Model.EntregaModel.PendenciaEntrega;
 using EntregaTitulo.Services.Model.EntregaModel.BaixaEntrega;
 using EntregaTitulo.Services.Model.EntregaModel.Impressao;
+using EntregaTitulo.Services.Model.EntregaModel.Pagamento;
 
 
 
@@ -332,7 +333,7 @@ namespace EntregaTitulo.Services.Controllers
             try
             {
 
-               
+
 
                 var entrega = _mapper?.Map<Entrega>(model);
 
@@ -363,6 +364,9 @@ namespace EntregaTitulo.Services.Controllers
 
 
         }
+
+       
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -461,6 +465,7 @@ namespace EntregaTitulo.Services.Controllers
         }
 
 
+
         [HttpGet("pendenciaEntrega")]
         [ProducesResponseType(typeof(List<PendenciaEntregaGetModel>), 200)]
         public IActionResult PendenciaEntregaAll()
@@ -508,6 +513,50 @@ namespace EntregaTitulo.Services.Controllers
                 var impressao = _entregaDomainService.ConsultarImpressao();
                 var impressaomodel = _mapper.Map<List<ImpressaoGetModel>>(impressao);
                 return Ok(impressaomodel);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { erro = e.Message });
+            }
+        }
+
+
+
+        [HttpPost("Pagamento")]
+        [ProducesResponseType(typeof(PagamentoGetModel), 201)]
+        public async Task<IActionResult> Pagamento([FromBody] PagamentoPostModel model,string matricula, string senha, int id)
+        {
+            try
+            {
+                if (!(await AutenticarUsuario(matricula, senha)))
+                {
+                    return StatusCode(401, new { error = "Usuário não autorizado." });
+                }
+              
+
+                var pagamento = _mapper?.Map<Pagamento>(model);
+                var result = _entregaDomainService?.CadastrarPagamento(pagamento, id, matricula);
+
+                //HTTP 201 (CREATED)
+                return StatusCode(201, _mapper.Map<PagamentoGetModel>(result));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { error = e.Message });
+            }
+        }
+
+      
+
+        [HttpGet("Pagamento")]
+        [ProducesResponseType(typeof(List<PagamentoGetModel>), 200)]
+        public IActionResult PagamentoAll()
+        {
+            try
+            {
+                var pagamento = _entregaDomainService.ConsultarPagamento();
+                var pagamentomodel = _mapper.Map<List<PagamentoGetModel>>(pagamento);
+                return Ok(pagamentomodel);
             }
             catch (Exception e)
             {

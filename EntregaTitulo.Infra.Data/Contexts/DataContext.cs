@@ -24,6 +24,7 @@ namespace EntregaTitulo.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new PendenciaEntregaMap());
             modelBuilder.ApplyConfiguration(new BaixaEntregaMap());
             modelBuilder.ApplyConfiguration(new ImpressaoMap());
+            modelBuilder.ApplyConfiguration(new PagamentoMap());
 
 
         }

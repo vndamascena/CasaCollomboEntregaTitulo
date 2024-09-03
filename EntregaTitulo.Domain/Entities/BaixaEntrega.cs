@@ -26,6 +26,6 @@ namespace EntregaTitulo.Domain.Entities
         public DateTime DataTime { get; set; }
         public string UsuarioId { get; set; }
         public Entrega? Entrega { get; set; }
-        public string? Pagamento { get; set; }
+        
     }
 }

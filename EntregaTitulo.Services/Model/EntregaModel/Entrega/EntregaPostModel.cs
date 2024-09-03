@@ -22,7 +22,7 @@ namespace EntregaTitulo.Services.Model.EntregaModel.Entrega
         [Required(ErrorMessage = "Selecione um dia da semana.")]
         public string? DiaSemana { get; set; }
         public string? Loja { get; set; }
-        public string? Pagamento { get; set; }
+      
 
 
 

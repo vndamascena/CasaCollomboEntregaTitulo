@@ -20,14 +20,17 @@ namespace EntregaTitulo.Domain.Services
         private readonly IBaixaEntregaRepository? _baixaEntregaRepository;
         private readonly IPendenciaEntregaRepository? _pendenciaEntregaRepository;
         private readonly IImpressaoRepository? _impressaoRepository;
+        private readonly IPagamentoRepository? _pagamentoRepository;
         public EntregaDomainService(IEntregaRepository? entregaRepository, IBaixaEntregaRepository? baixaEntregaRepository,
-            IPendenciaEntregaRepository pendenciaEntregaRepository, IImpressaoRepository? impressaoRepository)
+            IPendenciaEntregaRepository pendenciaEntregaRepository, 
+            IImpressaoRepository? impressaoRepository, IPagamentoRepository?pagamentoRepository)
         {
             {
                 _entregaRepository = entregaRepository;
                 _baixaEntregaRepository = baixaEntregaRepository;
                 _pendenciaEntregaRepository = pendenciaEntregaRepository;
                 _impressaoRepository = impressaoRepository;
+                _pagamentoRepository = pagamentoRepository;
 
             }
 
@@ -115,6 +118,8 @@ namespace EntregaTitulo.Domain.Services
             return _entregaRepository?.GetById(entrega.Id);
         }
 
+       
+
         public Entrega Atualizar(Entrega entrega)
         {
             var registro = ObterPorId(entrega.Id);
@@ -192,7 +197,7 @@ namespace EntregaTitulo.Domain.Services
                 Periodo = entrega.Periodo,
                 DataTime = DateTime.Now,
                 Loja = entrega.Loja,
-                Pagamento = entrega.Pagamento,
+
             };
             _baixaEntregaRepository.Add(baixaEntrega);
 
@@ -217,6 +222,37 @@ namespace EntregaTitulo.Domain.Services
 
             return baixaEntrega;  // Retorne o objeto BaixaEntrega criado
         }
+
+        public Pagamento CadastrarPagamento(Pagamento pagamento, int id, string matricula)
+        {
+            // Obter a entrega associada ao pagamento
+            var entrega = _entregaRepository.GetById(id);
+
+            // Verificar se a entrega está ativa
+            if (!entrega.Ativo)
+            {
+                throw new ApplicationException("Não é possível registrar um pagamento para uma entrega inativa.");
+            }
+
+            pagamento.NumeroNota = entrega.NumeroNota; 
+            pagamento.NomeCliente = entrega.NomeCliente; 
+            pagamento.EntregaId = entrega.Id;
+            pagamento.DataTime = DateTime.Now;
+            pagamento.UsuarioId = matricula;
+
+
+
+            _pagamentoRepository.Add(pagamento);
+
+           
+            pagamento = _pagamentoRepository?.GetById(pagamento.IdPagamento);
+
+          
+            _pagamentoRepository.Update(pagamento);
+
+            return pagamento;
+        }
+
 
 
 
@@ -258,6 +294,13 @@ namespace EntregaTitulo.Domain.Services
             if (impressao == null)
                 return new List<Impressao>();
             return impressao.ToList();
+        }
+        public List<Pagamento> ConsultarPagamento()
+        {
+            var pagamento = _pagamentoRepository?.GetAll();
+            if (pagamento == null)
+                return new List<Pagamento>();
+            return pagamento.ToList();
         }
 
         public List<PendenciaEntrega> ConsultarPendencia()
@@ -309,6 +352,8 @@ namespace EntregaTitulo.Domain.Services
             _impressaoRepository.Add(impress);
         }
 
+      
+
         public Entrega ObterPorId(int id)
         {
             var entrega = _entregaRepository?.GetById(id);
@@ -356,7 +401,7 @@ namespace EntregaTitulo.Domain.Services
                 DataEntregaProximaEntrega = dataEntregaProximaEntrega,
                 DiaSemanaPendencia = diaSemanaPendencia,
                 Loja = entrega.Loja,
-                Pagamento = entrega.Pagamento,
+               
             };
 
             _pendenciaEntregaRepository.Add(pendenciaEntrega);

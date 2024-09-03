@@ -25,18 +25,19 @@ namespace EntregaTitulo.Domain.Entities
         public string? DataEntrega { get; set; }
         public DateTime? DataCadastro { get; set; }
         public string? MotoristaAtual { get; set; }
-        public string? Pagamento { get; set; }
+       
 
         public List<BaixaEntrega> BaixaEntregas { get; set; }
         public List<PendenciaEntrega> PendenciaEntregas { get; set; }
         public List<Impressao> Impressao { get; set; }
+        public List<Pagamento> Pagamento { get; set; }
 
         public Entrega()
         {
             BaixaEntregas = new List<BaixaEntrega>();
             PendenciaEntregas = new List<PendenciaEntrega> { };
             Impressao = new List<Impressao>();
-
+            Pagamento = new List<Pagamento>();
         }
 
     }

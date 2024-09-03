@@ -45,7 +45,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(e => e.MotoristaAtual).HasColumnName("MOTORISTAATUAL");
             builder.Property(v => v.Loja).HasColumnName("LOJA");
             builder.Property(o => o.DataCadastro).HasColumnName("DATA");
-            builder.Property(e => e.Pagamento).HasColumnName("PAGAMENTO");
+           
         }
     }
 }
