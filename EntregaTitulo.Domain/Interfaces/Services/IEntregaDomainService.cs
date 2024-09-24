@@ -21,7 +21,7 @@ namespace EntregaTitulo.Domain.Interfaces.Services
         List<PendenciaEntrega> ConsultarPendencia();
         List<Impressao> ConsultarImpressao();
         List<Pagamento> ConsultarPagamento();
-        BaixaEntrega BaixaEntrega(int id, string matricula);
+        BaixaEntrega BaixaEntrega(int id, string matricula, string dataEntregaBaixa, string diaSemanaBaixa);
         Pagamento CadastrarPagamento(Pagamento pagamento, int id, string matricula);
         void PendenciaEntrega(int id, string matricula, string observacaoPendencia, string dataEntregaProximaEntrega, string diaProximaPendencia);
         void Impressao(int id, string matricula);

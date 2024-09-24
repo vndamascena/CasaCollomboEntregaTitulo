@@ -54,28 +54,30 @@ namespace EntregaTitulo.Services.Controllers
         {
             if (imageFile == null || imageFile.Length == 0)
             {
-                return BadRequest("Nenhum arquivo foi enviado.");
+                return BadRequest("Nenhuma imagem foi enviada.");
             }
 
-
-            string fileName = $"{_nextImageId}_{Path.GetFileName(imageFile.FileName)}";
-            _nextImageId++;
-
-            string filePath = Path.Combine(_imageFolderPath, fileName);
-
-
+            // Cria o diretório, se ainda não existir
             if (!Directory.Exists(_imageFolderPath))
             {
                 Directory.CreateDirectory(_imageFolderPath);
             }
 
+            // Busca todos os arquivos no diretório para calcular o próximo número
+            var existingFiles = Directory.GetFiles(_imageFolderPath);
+            int nextImageNumber = existingFiles.Length + 1;  // O próximo número será o total de arquivos + 1
 
+            // Gera o nome do arquivo com o número crescente
+            string fileName = $"{nextImageNumber}_{Path.GetFileName(imageFile.FileName)}";
+            string filePath = Path.Combine(_imageFolderPath, fileName);
+
+            // Salva a imagem no diretório
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await imageFile.CopyToAsync(stream);
             }
 
-
+            // Gera o caminho relativo para salvar no banco de dados
             string relativeFilePath = $"/images/{fileName}";
             await SalvarCaminhoImagemNoBanco(entregaId, relativeFilePath);
 
@@ -390,7 +392,7 @@ namespace EntregaTitulo.Services.Controllers
 
         [HttpPost("baixaEntrega")]
         [ProducesResponseType(typeof(BaixaEntregaGetModel), 201)]
-        public async Task<IActionResult> BaixaOcorrencia(string matricula, string senha, int id, [FromBody] BaixaEntregaPostModel baixa)
+        public async Task<IActionResult> BaixaEntrega(string matricula, string senha, int id, [FromBody] BaixaEntregaPostModel baixa)
         {
             try
             {
@@ -401,7 +403,7 @@ namespace EntregaTitulo.Services.Controllers
                 }
 
                 // Execute a baixa de entrega e obtenha o resultado
-                var baixaEntrega = _entregaDomainService.BaixaEntrega(id, matricula);
+                var baixaEntrega = _entregaDomainService.BaixaEntrega(id, matricula, baixa.DataEntregaBaixa, baixa.DiaSemanaBaixa);
 
                 if (baixaEntrega != null)
                 {

@@ -16,6 +16,7 @@
         public string? MotoristaAtual { get; set; }
         public string? Motorista { get; set; }
         public string? DataEntrega { get; set; }
+        public string? DataVenda { get; set; }
         public string? UsuarioId { get; set; }
         public DateTime DataTime { get; set; }
         public string? Loja { get; set; }

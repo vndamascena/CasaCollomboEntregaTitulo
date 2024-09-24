@@ -12,6 +12,7 @@ namespace EntregaTitulo.Services.Model.EntregaModel.Entrega
         public string? Periodo { get; set; }
         public string? DiaSemana { get; set; }
         public string? DataEntrega { get; set; }
+        public string? DataVenda { get; set; }
         public string? UsuarioId { get; set; }
         public string? Observacao { get; set; }
         public string? Loja { get; set; }

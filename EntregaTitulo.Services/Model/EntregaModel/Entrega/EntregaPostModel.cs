@@ -19,6 +19,8 @@ namespace EntregaTitulo.Services.Model.EntregaModel.Entrega
         public string? ImagemUrl { get; set; }
         public string? Observacao { get; set; }
         public string? DataEntrega { get; set; }
+        public string? DataVenda { get; set; }
+
         [Required(ErrorMessage = "Selecione um dia da semana.")]
         public string? DiaSemana { get; set; }
         public string? Loja { get; set; }

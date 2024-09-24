@@ -54,6 +54,7 @@ namespace EntregaTitulo.Domain.Services
                 Valor = registro.Valor,
                 DiaSemana = registro.DiaSemana,
                 DataEntrega = registro.DataEntrega,
+                DataVenda = registro.DataVenda,
                 Periodo = registro.Periodo,
                 Observacao = registro.Observacao,
                 Ativo = registro.Ativo,
@@ -94,6 +95,7 @@ namespace EntregaTitulo.Domain.Services
                 Valor = registro.Valor,
                 DiaSemana = registro.DiaSemana,
                 DataEntrega = registro.DataEntrega,
+                DataVenda = registro.DataVenda,
                 Periodo = registro.Periodo,
                 Observacao = registro.Observacao,
                 Ativo = registro.Ativo,
@@ -135,6 +137,7 @@ namespace EntregaTitulo.Domain.Services
                 Valor = entrega.Valor,
                 DiaSemana = entrega.DiaSemana,
                 DataEntrega = entrega.DataEntrega,
+                DataVenda = entrega.DataVenda,
                 Periodo = entrega.Periodo,
                 Observacao = entrega.Observacao,
                 Ativo = registro.Ativo,
@@ -155,7 +158,7 @@ namespace EntregaTitulo.Domain.Services
             return _entregaRepository?.GetById(entrega.Id);
         }
 
-        public BaixaEntrega BaixaEntrega(int id, string matricula)
+        public BaixaEntrega BaixaEntrega(int id, string matricula, string dataEntregaBaixa, string diaSemanaBaixa)
         {
             var entrega = _entregaRepository.GetById(id);
             PendenciaEntrega pendencia = null;
@@ -191,14 +194,19 @@ namespace EntregaTitulo.Domain.Services
                 ImagemUrl = entrega.ImagemUrl,
                 Vendedor = entrega.Vendedor,
                 Motorista = entrega.Motorista,
+                DataVenda = entrega.DataVenda,
+                DataEntregaBaixa = dataEntregaBaixa,
                 UsuarioId = matricula,
                 Observacao = entrega.Observacao,
-                DiaSemana = entrega.DiaSemana,
+                DiaSemanaBaixa = diaSemanaBaixa,
                 Periodo = entrega.Periodo,
                 DataTime = DateTime.Now,
                 Loja = entrega.Loja,
 
             };
+
+            Console.WriteLine($"DataEntrega: {baixaEntrega.DataEntregaBaixa}");
+            Console.WriteLine($"DiaSemana: {baixaEntrega.DiaSemanaBaixa}");
             _baixaEntregaRepository.Add(baixaEntrega);
 
             entrega.Ativo = false;
@@ -391,6 +399,7 @@ namespace EntregaTitulo.Domain.Services
                 UsuarioId = matricula,
                 Periodo = entrega.Periodo,
                 DataEntrega = entrega.DataEntrega,
+                DataVenda = entrega.DataVenda,
                 Vendedor = entrega.Vendedor,
                 Observacao = entrega.Observacao,
                 ObservacaoPendencia = observacaoPendencia,

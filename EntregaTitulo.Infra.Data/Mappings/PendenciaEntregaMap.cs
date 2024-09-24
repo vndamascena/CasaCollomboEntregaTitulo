@@ -28,6 +28,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(v => v.DataTime).HasColumnName("DATA");
             builder.Property(e => e.DiaSemana).HasColumnName("DIASEMANA");
             builder.Property(e => e.DataEntrega).HasColumnName("DataEntrega");
+            builder.Property(e => e.DataVenda).HasColumnName("DATAVENDA");
             builder.Property(e => e.Motorista).HasColumnName("MOTORISTA");
             builder.Property(e => e.MotoristaAtual).HasColumnName("MOTORISTAATUAL");
             builder.Property(e => e.Periodo).HasColumnName("PERIODO").IsRequired();

@@ -19,7 +19,7 @@ namespace EntregaTitulo.Infra.Data.Repositories
                 return dataContext
                     .Set<Entrega>()
                     
-                    .OrderBy(p => p.DataCadastro)
+                    .OrderBy(p => p.NomeCliente)
 
                     .ToList();
         }
@@ -29,7 +29,7 @@ namespace EntregaTitulo.Infra.Data.Repositories
                 return dataContext
                     .Set<Entrega>()
 
-                    .OrderBy(p => p.DataCadastro)
+                    .OrderBy(p => p.NomeCliente)
 
                     .ToList();
         }

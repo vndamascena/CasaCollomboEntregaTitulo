@@ -36,7 +36,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(e => e.DiaSemana).HasColumnName("DIASEMANA").IsRequired();
 
             builder.Property(e => e.DataEntrega).HasColumnName("DataEntrega");
-
+            builder.Property(e => e.DataVenda).HasColumnName("DATAVENDA");
             builder.Property(e => e.Periodo).HasColumnName("PERIODO").IsRequired();
 
             builder.Property(e => e.Vendedor).HasColumnName("VENDEDOR");

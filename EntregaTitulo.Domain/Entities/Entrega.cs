@@ -23,6 +23,7 @@ namespace EntregaTitulo.Domain.Entities
         public string? Periodo { get; set; }
         public string?  Motorista { get; set; }
         public string? DataEntrega { get; set; }
+        public string? DataVenda { get; set; }
         public DateTime? DataCadastro { get; set; }
         public string? MotoristaAtual { get; set; }
        
