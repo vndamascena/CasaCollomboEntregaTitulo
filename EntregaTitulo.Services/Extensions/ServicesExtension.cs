@@ -17,7 +17,9 @@ namespace EntregaTitulo.Services.Extensions
            
             services.AddTransient<IPendenciaEntregaRepository, PendenciaEntregaRepository>();
 
-           
+           services.AddTransient<ITituloReceberDomainService, TituloReceberDomainService>();
+            services.AddTransient<IBaixaTituloRepository, BaixaTituloRepository>();
+            services.AddTransient<ITituloReceberRepository, TituloReceberRepository>();
             services.AddTransient<IBaixaEntregaRepository, BaixaEntregaRepository>();
             services.AddTransient<IImpressaoRepository, ImpressaoRepository>();
             services.AddTransient<IPagamentoRepository, PagamentoRepository>();

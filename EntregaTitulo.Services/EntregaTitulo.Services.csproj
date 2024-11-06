@@ -18,4 +18,8 @@
     <ProjectReference Include="..\EntregaTitulo.Infra.Data\EntregaTitulo.Infra.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imagesTitulo\" />
+  </ItemGroup>
+
 </Project>

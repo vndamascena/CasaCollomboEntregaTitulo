@@ -5,6 +5,8 @@ using EntregaTitulo.Services.Model.EntregaModel.Entrega;
 using EntregaTitulo.Services.Model.EntregaModel.Impressao;
 using EntregaTitulo.Services.Model.EntregaModel.Pagamento;
 using EntregaTitulo.Services.Model.EntregaModel.PendenciaEntrega;
+using EntregaTitulo.Services.Model.TituloModel.BaixaTitulo;
+using EntregaTitulo.Services.Model.TituloModel.TituloReceber;
 
 namespace EntregaTitulo.Services.Mappings
 {
@@ -19,7 +21,18 @@ namespace EntregaTitulo.Services.Mappings
                     entity.Ativo = true;
 
                 });
+            CreateMap<TituloReceberPostModel, TituloReceber>()
+                .AfterMap((model, entity) =>
+                {
+                    entity.DataCadastro = DateTime.Now;
+                    entity.Ativo = true;
+                });
             CreateMap<BaixaEntregaPostModel, BaixaEntrega>()
+                .AfterMap((model, entity) =>
+                {
+                    entity.DataTime = DateTime.Now;
+                });
+            CreateMap<BaixaTituloPostModel, BaixaTitulo>()
                 .AfterMap((model, entity) =>
                 {
                     entity.DataTime = DateTime.Now;
@@ -45,12 +58,18 @@ namespace EntregaTitulo.Services.Mappings
             CreateMap<EntregaGetModel, Entrega>();
             CreateMap<EntregaPutModel, Entrega>();
             CreateMap<Entrega, EntregaPutModel>();
+            CreateMap<TituloReceberPutModel, TituloReceber>();
+            CreateMap<TituloReceber, TituloReceberPutModel>();
             CreateMap<BaixaEntrega, BaixaEntregaGetModel>();
+            CreateMap<BaixaTitulo, BaixaTituloGetModel>();
             CreateMap<PendenciaEntrega, PendenciaEntregaGetModel>();
             CreateMap<Impressao, ImpressaoGetModel>();
             CreateMap<ImpressaoGetModel, Impressao>();
             CreateMap<PagamentoGetModel, Pagamento>();
             CreateMap<Pagamento, PagamentoGetModel>();
+            CreateMap<TituloReceber, TituloReceberGetModel>();
+            CreateMap<TituloReceberGetModel, TituloReceber>();
+
 
 
         }

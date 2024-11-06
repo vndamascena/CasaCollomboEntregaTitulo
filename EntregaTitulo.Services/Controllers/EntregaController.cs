@@ -155,7 +155,7 @@ namespace EntregaTitulo.Services.Controllers
 
         private async Task SalvarBaixaCaminhoImagemNoBanco(int idBaixaEntrega, string relativeFilePath)
         {
-            string connectionString = @"Data Source=SQL8020.site4now.net;Initial Catalog=db_aa8a78_entrega;User Id=db_aa8a78_entrega_admin;Password=colombo24";
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDENTREGATITULO;Integrated Security=True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = "UPDATE BAIXAENTREGA SET URLIMAGEM = @FilePath WHERE IDBAIXAENTREGA = @IDBAIXAENTREGA";
