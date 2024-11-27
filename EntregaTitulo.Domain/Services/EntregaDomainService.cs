@@ -122,22 +122,44 @@ namespace EntregaTitulo.Domain.Services
 
        
 
-        public Entrega Atualizar(Entrega entrega)
+        public Entrega Atualizar(Entrega entrega, string matricula)
         {
             var registro = ObterPorId(entrega.Id);
+
+
+           
+            PendenciaEntrega pendencia = null;
+
+            if (registro == null)
+            {
+                // Verifica se é um ID de pendência
+                pendencia = _pendenciaEntregaRepository.GetById(entrega.Id);
+                if (pendencia == null)
+                {
+                    throw new ApplicationException("Entrega ou pendência não encontrada.");
+                }
+
+                // Obtém a entrega associada à pendência
+                entrega = _entregaRepository.GetById(pendencia.EntregaId);
+                if (entrega == null)
+                {
+                    throw new ApplicationException("Entrega associada à pendência não encontrada.");
+                }
+            }
+
             if (registro == null)
                 throw new ApplicationException("Entrega não encontrado para edição.");
 
             var entregaAtualizado = new Entrega
             {
-                Id = entrega.Id,
+                Id = registro.Id,
 
                 NomeCliente = entrega.NomeCliente,
                 NumeroNota = entrega.NumeroNota,
-                Valor = entrega.Valor,
+                Valor = registro.Valor,
                 DiaSemana = entrega.DiaSemana,
                 DataEntrega = entrega.DataEntrega,
-                DataVenda = entrega.DataVenda,
+                DataVenda = registro.DataVenda,
                 Periodo = entrega.Periodo,
                 Observacao = entrega.Observacao,
                 Ativo = registro.Ativo,
@@ -145,13 +167,33 @@ namespace EntregaTitulo.Domain.Services
                 DataCadastro = registro.DataCadastro,
                 UsuarioId = registro.UsuarioId,
                 Loja = registro.Loja,
+                Vendedor = registro.Vendedor,
                 Pagamento = registro.Pagamento,
+                DataAtualizacao = DateTime.Now,
+                UsuarioIdAtualizador = matricula
 
 
             };
             if (registro.DataCadastro == null)
             {
                 entregaAtualizado.DataCadastro = DateTime.Now;
+            }
+
+
+            if (pendencia != null)
+            {
+                pendencia.Ativo = false;
+                _pendenciaEntregaRepository.Update(pendencia);
+            }
+            else
+            {
+                // Também verifica se há uma pendência associada à entrega para desativá-la
+                pendencia = _pendenciaEntregaRepository.GetByEntregaId(entrega.Id);
+                if (pendencia != null)
+                {
+                    pendencia.Ativo = false;
+                    _pendenciaEntregaRepository.Update(pendencia);
+                }
             }
 
             _entregaRepository?.Update(entregaAtualizado);

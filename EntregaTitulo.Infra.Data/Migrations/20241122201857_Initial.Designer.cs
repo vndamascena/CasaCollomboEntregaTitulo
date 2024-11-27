@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntregaTitulo.Infra.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241104181129_initial")]
-    partial class initial
+    [Migration("20241122201857_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,6 +124,10 @@ namespace EntregaTitulo.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("DataPrevistaPagamento")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DATAPREVPG");
+
                     b.Property<DateTime>("DataTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("DATA");
@@ -131,10 +135,6 @@ namespace EntregaTitulo.Infra.Data.Migrations
                     b.Property<string>("DataVenda")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("DATAVENDA");
-
-                    b.Property<int>("IdTitulo")
-                        .HasColumnType("int")
-                        .HasColumnName("ENTREGAID");
 
                     b.Property<string>("ImagemUrl")
                         .HasColumnType("nvarchar(max)")
@@ -161,6 +161,10 @@ namespace EntregaTitulo.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("TELEFONE");
 
+                    b.Property<int>("TituloId")
+                        .HasColumnType("int")
+                        .HasColumnName("ENTREGAID");
+
                     b.Property<int?>("TituloReceberId")
                         .HasColumnType("int");
 
@@ -179,11 +183,81 @@ namespace EntregaTitulo.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdTitulo");
+                    b.HasIndex("TituloId");
 
                     b.HasIndex("TituloReceberId");
 
                     b.ToTable("BAIXAETITULORECEBER", (string)null);
+                });
+
+            modelBuilder.Entity("EntregaTitulo.Domain.Entities.BaixaTituloFuncionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DataPrevistaPagamento")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DATAPREVPG");
+
+                    b.Property<DateTime>("DataTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DATA");
+
+                    b.Property<string>("DataVenda")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DATAVENDA");
+
+                    b.Property<string>("ImagemUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("URLIMAGEM");
+
+                    b.Property<string>("Loja")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOJA");
+
+                    b.Property<string>("NomeCliente")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("NOMECLIENTE");
+
+                    b.Property<int?>("NumeroNota")
+                        .HasColumnType("int")
+                        .HasColumnName("NUMERONOTA");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OBSERVACAO");
+
+                    b.Property<int>("TituloId")
+                        .HasColumnType("int")
+                        .HasColumnName("ENTREGAID");
+
+                    b.Property<int?>("TituloReceberFuncionarioId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("USUARIOID");
+
+                    b.Property<string>("Valor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("VALORNOTA");
+
+                    b.Property<string>("Vendedor")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("VENDEDOR");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TituloId");
+
+                    b.HasIndex("TituloReceberFuncionarioId");
+
+                    b.ToTable("BAIXAETITULORECEBERFUNCIONARIO", (string)null);
                 });
 
             modelBuilder.Entity("EntregaTitulo.Domain.Entities.Entrega", b =>
@@ -198,6 +272,10 @@ namespace EntregaTitulo.Infra.Data.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit")
                         .HasColumnName("ATIVO");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DATAATUALIZACAO");
 
                     b.Property<DateTime?>("DataCadastro")
                         .HasColumnType("datetime2")
@@ -256,6 +334,10 @@ namespace EntregaTitulo.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("USUARIOID");
+
+                    b.Property<string>("UsuarioIdAtualizador")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("USUARIOIDATUALIZADOR");
 
                     b.Property<string>("Valor")
                         .HasColumnType("nvarchar(max)")
@@ -484,6 +566,10 @@ namespace EntregaTitulo.Infra.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DATACADASTRO");
 
+                    b.Property<string>("DataPrevistaPagamento")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DATAPREVPG");
+
                     b.Property<string>("DataVenda")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -538,6 +624,80 @@ namespace EntregaTitulo.Infra.Data.Migrations
                     b.ToTable("TITULORECEBER", (string)null);
                 });
 
+            modelBuilder.Entity("EntregaTitulo.Domain.Entities.TituloReceberFuncionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("ATIVO");
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DATAALTERACAO");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DATACADASTRO");
+
+                    b.Property<string>("DataPrevistaPagamento")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DATAPREVPG");
+
+                    b.Property<string>("DataVenda")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DATAVENDA");
+
+                    b.Property<string>("ImagemUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("IMAGEMURL");
+
+                    b.Property<string>("Loja")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LOJA");
+
+                    b.Property<string>("NomeCliente")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("NOMECLIENTE");
+
+                    b.Property<int>("NumeroNota")
+                        .HasColumnType("int")
+                        .HasColumnName("NUMERONOTA");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OBSERVACAO");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("USUARIOID");
+
+                    b.Property<string>("UsuarioIdAtualizador")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("USUARIOIDATUALIZADOR");
+
+                    b.Property<string>("Valor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("VALOR");
+
+                    b.Property<string>("Vendedor")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("VENDEDOR");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TITULORECEBERFUNCIONARIO", (string)null);
+                });
+
             modelBuilder.Entity("EntregaTitulo.Domain.Entities.BaixaEntrega", b =>
                 {
                     b.HasOne("EntregaTitulo.Domain.Entities.Entrega", "Entrega")
@@ -557,7 +717,7 @@ namespace EntregaTitulo.Infra.Data.Migrations
                 {
                     b.HasOne("EntregaTitulo.Domain.Entities.TituloReceber", "TituloReceber")
                         .WithMany()
-                        .HasForeignKey("IdTitulo")
+                        .HasForeignKey("TituloId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -566,6 +726,21 @@ namespace EntregaTitulo.Infra.Data.Migrations
                         .HasForeignKey("TituloReceberId");
 
                     b.Navigation("TituloReceber");
+                });
+
+            modelBuilder.Entity("EntregaTitulo.Domain.Entities.BaixaTituloFuncionario", b =>
+                {
+                    b.HasOne("EntregaTitulo.Domain.Entities.TituloReceberFuncionario", "TituloReceberFuncionario")
+                        .WithMany()
+                        .HasForeignKey("TituloId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntregaTitulo.Domain.Entities.TituloReceberFuncionario", null)
+                        .WithMany("baixaTitulosFuncionario")
+                        .HasForeignKey("TituloReceberFuncionarioId");
+
+                    b.Navigation("TituloReceberFuncionario");
                 });
 
             modelBuilder.Entity("EntregaTitulo.Domain.Entities.Impressao", b =>
@@ -627,6 +802,11 @@ namespace EntregaTitulo.Infra.Data.Migrations
             modelBuilder.Entity("EntregaTitulo.Domain.Entities.TituloReceber", b =>
                 {
                     b.Navigation("baixaTitulos");
+                });
+
+            modelBuilder.Entity("EntregaTitulo.Domain.Entities.TituloReceberFuncionario", b =>
+                {
+                    b.Navigation("baixaTitulosFuncionario");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace EntregaTitulo.Infra.Data.Mappings
 {
-    public class BaixaTituloReceberMap : IEntityTypeConfiguration<BaixaTitulo>
+    public class BaixaTituloReceberFuncionarioMap : IEntityTypeConfiguration<BaixaTituloFuncionario>
     {
-        public void Configure(EntityTypeBuilder<BaixaTitulo> builder)
+        public void Configure(EntityTypeBuilder<BaixaTituloFuncionario> builder)
         {
-            builder.ToTable("BAIXAETITULORECEBER");
+            builder.ToTable("BAIXAETITULORECEBERFUNCIONARIO");
 
             builder.HasKey(e => e.Id);
 
@@ -25,7 +25,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(e => e.Valor).HasColumnName("VALORNOTA");
             builder.Property(e => e.ImagemUrl).HasColumnName("URLIMAGEM");
             builder.Property(e => e.Observacao).HasColumnName("OBSERVACAO");
-            builder.Property(o => o.Telefone).HasColumnName("TELEFONE");
+            
             builder.Property(v => v.DataTime).HasColumnName("DATA");
             builder.Property(e => e.DataVenda).HasColumnName("DATAVENDA");
             builder.Property(v => v.Loja).HasColumnName("LOJA");
@@ -33,11 +33,10 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(e => e.DataPrevistaPagamento).HasColumnName("DATAPREVPG");
 
 
-            builder.HasOne(e => e.TituloReceber)
+            builder.HasOne(e => e.TituloReceberFuncionario)
                 .WithMany()
                 .HasForeignKey(e => e.TituloId)
                 .OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }

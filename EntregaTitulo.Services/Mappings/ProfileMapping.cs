@@ -27,6 +27,12 @@ namespace EntregaTitulo.Services.Mappings
                     entity.DataCadastro = DateTime.Now;
                     entity.Ativo = true;
                 });
+            CreateMap<TituloReceberFuncionarioPostModel, TituloReceberFuncionario>()
+               .AfterMap((model, entity) =>
+               {
+                   entity.DataCadastro = DateTime.Now;
+                   entity.Ativo = true;
+               });
             CreateMap<BaixaEntregaPostModel, BaixaEntrega>()
                 .AfterMap((model, entity) =>
                 {
@@ -37,6 +43,11 @@ namespace EntregaTitulo.Services.Mappings
                 {
                     entity.DataTime = DateTime.Now;
                 });
+            CreateMap<BaixaTituloFuncionarioPostModel, BaixaTituloFuncionario>()
+               .AfterMap((model, entity) =>
+               {
+                   entity.DataTime = DateTime.Now;
+               });
             CreateMap<PendenciaEntregaPostModel, PendenciaEntrega>()
 
                 .AfterMap((model, entity) =>
@@ -69,6 +80,12 @@ namespace EntregaTitulo.Services.Mappings
             CreateMap<Pagamento, PagamentoGetModel>();
             CreateMap<TituloReceber, TituloReceberGetModel>();
             CreateMap<TituloReceberGetModel, TituloReceber>();
+
+            CreateMap<TituloReceberFuncionarioPutModel, TituloReceberFuncionario>();
+            CreateMap<TituloReceberFuncionario, TituloReceberFuncionarioPutModel>();
+            CreateMap<BaixaTituloFuncionario, BaixaTituloFuncionarioGetModel>();
+            CreateMap<TituloReceberFuncionario, TituloReceberFuncionarioGetModel>();
+            CreateMap<TituloReceberFuncionarioGetModel, TituloReceberFuncionario>();
 
 
 

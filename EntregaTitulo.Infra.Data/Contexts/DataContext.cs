@@ -14,7 +14,7 @@ namespace EntregaTitulo.Infra.Data.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Substitua a string de conexão padrão pelo MySQL
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDENTREGATITULO;Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=SQL8020.site4now.net;Initial Catalog=db_aa8a78_entrega;User Id=db_aa8a78_entrega_admin;Password=colombo24");
 
         }
 

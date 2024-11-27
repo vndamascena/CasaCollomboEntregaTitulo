@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace EntregaTitulo.Infra.Data.Mappings
 {
-    public class TituloReceberMap : IEntityTypeConfiguration<TituloReceber>
+    public class TituloReceberFuncionarioMap : IEntityTypeConfiguration<TituloReceberFuncionario>
     {
-        public void Configure(EntityTypeBuilder<TituloReceber> builder)
+        public void Configure(EntityTypeBuilder<TituloReceberFuncionario> builder)
         {
-            builder.ToTable("TITULORECEBER");
+            builder.ToTable("TITULORECEBERFUNCIONARIO");
 
             builder.HasKey(t => t.Id);
 
@@ -25,7 +25,6 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(t => t.UsuarioId).HasColumnName("USUARIOID");
             builder.Property(t => t.ImagemUrl).HasColumnName("IMAGEMURL");
             builder.Property(o => o.Observacao).HasColumnName("OBSERVACAO");
-            builder.Property(o => o.Telefone).HasColumnName("TELEFONE");
             builder.Property(v => v.Loja).HasColumnName("LOJA");
             builder.Property(e => e.Vendedor).HasColumnName("VENDEDOR");
             builder.Property(e => e.DataVenda).HasColumnName("DATAVENDA");
@@ -33,6 +32,7 @@ namespace EntregaTitulo.Infra.Data.Mappings
             builder.Property(o => o.DataAlteracao).HasColumnName("DATAALTERACAO");
             builder.Property(t => t.UsuarioIdAtualizador).HasColumnName("USUARIOIDATUALIZADOR");
             builder.Property(e => e.DataPrevistaPagamento).HasColumnName("DATAPREVPG");
+
         }
     }
 }

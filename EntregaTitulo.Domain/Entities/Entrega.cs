@@ -26,7 +26,9 @@ namespace EntregaTitulo.Domain.Entities
         public string? DataVenda { get; set; }
         public DateTime? DataCadastro { get; set; }
         public string? MotoristaAtual { get; set; }
-       
+        public DateTime? DataAtualizacao { get; set; }
+        public string? UsuarioIdAtualizador { get; set; }
+
 
         public List<BaixaEntrega> BaixaEntregas { get; set; }
         public List<PendenciaEntrega> PendenciaEntregas { get; set; }

@@ -155,7 +155,7 @@ namespace EntregaTitulo.Services.Controllers
 
         private async Task SalvarBaixaCaminhoImagemNoBanco(int idBaixaEntrega, string relativeFilePath)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDENTREGATITULO;Integrated Security=True;";
+            string connectionString = @"Data Source=SQL8020.site4now.net;Initial Catalog=db_aa8a78_entrega;User Id=db_aa8a78_entrega_admin;Password=colombo24";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = "UPDATE BAIXAENTREGA SET URLIMAGEM = @FilePath WHERE IDBAIXAENTREGA = @IDBAIXAENTREGA";
@@ -260,7 +260,7 @@ namespace EntregaTitulo.Services.Controllers
                 var entrega = _mapper?.Map<Entrega>(model);
 
 
-                var result = _entregaDomainService?.Atualizar(entrega);
+                var result = _entregaDomainService?.Atualizar(entrega, matricula);
 
                 var entregaGetModel = _mapper.Map<EntregaGetModel>(result);
 
@@ -592,7 +592,7 @@ namespace EntregaTitulo.Services.Controllers
             {
                 { "65", "1723" },   // Exemplo: Matricula e senha do usuário 1
                 { "1", "2816" }, // Exemplo: Matricula e senha do usuário 2
-                 { "5", "1005" },   // Exemplo: Matricula e senha do usuário 1
+                 { "5", "1005" },   
                 { "2", "1470" },
                 {"6", "1457" }
             };

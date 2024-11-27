@@ -20,6 +20,8 @@ namespace EntregaTitulo.Services.Model.EntregaModel.Entrega
         public string? Motorista { get; set; }
         public string? MotoristaAtual { get; set; }
         public DateTime? DataCadastro { get; set; }
-       
+        public DateTime? DataAtualizacao { get; set; }
+        public string? UsuarioIdAtualizador { get; set; }
+
     }
 }

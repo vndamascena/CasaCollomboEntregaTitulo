@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EntregaTitulo.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,9 @@ namespace EntregaTitulo.Infra.Data.Migrations
                     DataEntrega = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DATAVENDA = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DATA = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MOTORISTAATUAL = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MOTORISTAATUAL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAATUALIZACAO = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    USUARIOIDATUALIZADOR = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,11 +60,38 @@ namespace EntregaTitulo.Infra.Data.Migrations
                     DATACADASTRO = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DATAALTERACAO = table.Column<DateTime>(type: "datetime2", nullable: false),
                     USUARIOIDATUALIZADOR = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAPREVPG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ATIVO = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TITULORECEBER", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TITULORECEBERFUNCIONARIO",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NUMERONOTA = table.Column<int>(type: "int", nullable: false),
+                    NOMECLIENTE = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VALOR = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OBSERVACAO = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VENDEDOR = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LOJA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    USUARIOID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IMAGEMURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAVENDA = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DATACADASTRO = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DATAALTERACAO = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    USUARIOIDATUALIZADOR = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAPREVPG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ATIVO = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TITULORECEBERFUNCIONARIO", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,6 +255,7 @@ namespace EntregaTitulo.Infra.Data.Migrations
                     USUARIOID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     URLIMAGEM = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DATAVENDA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAPREVPG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DATA = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TituloReceberId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -242,6 +272,42 @@ namespace EntregaTitulo.Infra.Data.Migrations
                         name: "FK_BAIXAETITULORECEBER_TITULORECEBER_TituloReceberId",
                         column: x => x.TituloReceberId,
                         principalTable: "TITULORECEBER",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BAIXAETITULORECEBERFUNCIONARIO",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ENTREGAID = table.Column<int>(type: "int", nullable: false),
+                    NUMERONOTA = table.Column<int>(type: "int", nullable: true),
+                    NOMECLIENTE = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VALORNOTA = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OBSERVACAO = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VENDEDOR = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LOJA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    USUARIOID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    URLIMAGEM = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAVENDA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATAPREVPG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DATA = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TituloReceberFuncionarioId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BAIXAETITULORECEBERFUNCIONARIO", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_BAIXAETITULORECEBERFUNCIONARIO_TITULORECEBERFUNCIONARIO_ENTREGAID",
+                        column: x => x.ENTREGAID,
+                        principalTable: "TITULORECEBERFUNCIONARIO",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BAIXAETITULORECEBERFUNCIONARIO_TITULORECEBERFUNCIONARIO_TituloReceberFuncionarioId",
+                        column: x => x.TituloReceberFuncionarioId,
+                        principalTable: "TITULORECEBERFUNCIONARIO",
                         principalColumn: "ID");
                 });
 
@@ -264,6 +330,16 @@ namespace EntregaTitulo.Infra.Data.Migrations
                 name: "IX_BAIXAETITULORECEBER_TituloReceberId",
                 table: "BAIXAETITULORECEBER",
                 column: "TituloReceberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BAIXAETITULORECEBERFUNCIONARIO_ENTREGAID",
+                table: "BAIXAETITULORECEBERFUNCIONARIO",
+                column: "ENTREGAID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BAIXAETITULORECEBERFUNCIONARIO_TituloReceberFuncionarioId",
+                table: "BAIXAETITULORECEBERFUNCIONARIO",
+                column: "TituloReceberFuncionarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IMPRESSAO_ENTREGAID",
@@ -306,6 +382,9 @@ namespace EntregaTitulo.Infra.Data.Migrations
                 name: "BAIXAETITULORECEBER");
 
             migrationBuilder.DropTable(
+                name: "BAIXAETITULORECEBERFUNCIONARIO");
+
+            migrationBuilder.DropTable(
                 name: "IMPRESSAO");
 
             migrationBuilder.DropTable(
@@ -316,6 +395,9 @@ namespace EntregaTitulo.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "TITULORECEBER");
+
+            migrationBuilder.DropTable(
+                name: "TITULORECEBERFUNCIONARIO");
 
             migrationBuilder.DropTable(
                 name: "ENTREGA");

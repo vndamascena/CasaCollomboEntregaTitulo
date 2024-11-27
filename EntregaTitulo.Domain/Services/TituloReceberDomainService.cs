@@ -28,7 +28,7 @@ namespace EntregaTitulo.Domain.Services
 
             var tituloAtualizado = new TituloReceber
             {
-                Id = tituloReceber.Id,
+                Id = registro.Id,
 
               
                 NomeCliente = tituloReceber.NomeCliente,
@@ -44,7 +44,9 @@ namespace EntregaTitulo.Domain.Services
                 Loja = registro.Loja,
                 UsuarioIdAtualizador = matricula,
                 Telefone = tituloReceber.Telefone,
-                DataAlteracao = DateTime.Now
+                DataAlteracao = DateTime.Now,
+                DataPrevistaPagamento = tituloReceber.DataPrevistaPagamento
+                
                
 
 
@@ -73,7 +75,7 @@ namespace EntregaTitulo.Domain.Services
 
             var baixaTitulo = new BaixaTitulo
             {
-                IdTitulo = titulo.Id,
+                TituloId = titulo.Id,
                 NumeroNota = titulo.NumeroNota,
                 NomeCliente = titulo.NomeCliente,
                 Valor = titulo.Valor,
@@ -85,6 +87,8 @@ namespace EntregaTitulo.Domain.Services
                 Loja = titulo.Loja,
                 UsuarioId = matricula,
                 Telefone = titulo.Telefone,
+                DataPrevistaPagamento = titulo.DataPrevistaPagamento
+                
 
 
             };

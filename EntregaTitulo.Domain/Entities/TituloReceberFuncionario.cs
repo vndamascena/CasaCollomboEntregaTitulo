@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace EntregaTitulo.Domain.Entities
 {
-    public class TituloReceber
+    public class TituloReceberFuncionario
     {
-
         public int Id { get; set; }
         public int NumeroNota { get; set; }
         public string NomeCliente { get; set; }
         public string Valor { get; set; }
-        public string Telefone { get; set; }
         public string? Observacao { get; set; }
         public string? Vendedor { get; set; }
         public string? Loja { get; set; }
@@ -26,11 +24,11 @@ namespace EntregaTitulo.Domain.Entities
         public string? DataPrevistaPagamento { get; set; }
 
         public bool Ativo { get; set; }
-        public List<BaixaTitulo> baixaTitulos { get; set; }
+        public List<BaixaTituloFuncionario> baixaTitulosFuncionario { get; set; }
 
-        public TituloReceber() 
+        public TituloReceberFuncionario()
         {
-            baixaTitulos= new List<BaixaTitulo>();
+            baixaTitulosFuncionario = new List<BaixaTituloFuncionario>();
         }
     }
 }

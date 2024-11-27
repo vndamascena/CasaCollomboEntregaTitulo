@@ -13,8 +13,10 @@
         public string? Observacao { get; set; }
         public string? Vendedor { get; set; }
         public string? Loja { get; set; }
+        public string? DataPrevistaPagamento { get; set; }
         public string? UsuarioId { get; set; }
         public DateTime DataAlteracao { get; set; }
         public string? UsuarioIdAtualizador { get; set; }
+        
     }
 }

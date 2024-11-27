@@ -11,7 +11,7 @@ namespace EntregaTitulo.Domain.Interfaces.Services
     public interface IEntregaDomainService
     {
         Entrega Cadastrar(Entrega entrega, string matricula);
-        Entrega Atualizar(Entrega entrega);
+        Entrega Atualizar(Entrega entrega, string matricula);
         Entrega AtualizarMotorista(Entrega entrega);
         Entrega CadastrarMotorista(Entrega entrega);
        

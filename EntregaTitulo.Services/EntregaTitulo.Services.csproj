@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\imagesTituloFuncionario\" />
     <Folder Include="wwwroot\imagesTitulo\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
