@@ -13,20 +13,18 @@ namespace EntregaTitulo.Services.Extensions
         {
             services.AddTransient<IEntregaDomainService, EntregaDomainService>();
             services.AddTransient<IEntregaRepository, EntregaRepository>();
-
-
             services.AddTransient<IPendenciaEntregaRepository, PendenciaEntregaRepository>();
-
             services.AddTransient<ITituloReceberDomainService, TituloReceberDomainService>();
             services.AddTransient<IBaixaTituloRepository, BaixaTituloRepository>();
             services.AddTransient<ITituloReceberRepository, TituloReceberRepository>();
             services.AddTransient<IBaixaEntregaRepository, BaixaEntregaRepository>();
             services.AddTransient<IImpressaoRepository, ImpressaoRepository>();
             services.AddTransient<IPagamentoRepository, PagamentoRepository>();
-
             services.AddTransient<ITituloReceberFuncionarioDomainService, TituloReceberFuncionarioDomainService>();
             services.AddTransient<IBaixaTituloFuncionarioRepository, BaixaTituloFuncionarioRepository>();
             services.AddTransient<ITituloReceberFuncionarioRespository, TituloReceberFuncionarioRepository>();
+            services.AddTransient<IEscalaRepository, EscalaRepository>();
+            services.AddTransient<IHomeDomainService, HomeDomainService>();
 
 
         }

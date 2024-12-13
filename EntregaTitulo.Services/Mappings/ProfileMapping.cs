@@ -5,6 +5,7 @@ using EntregaTitulo.Services.Model.EntregaModel.Entrega;
 using EntregaTitulo.Services.Model.EntregaModel.Impressao;
 using EntregaTitulo.Services.Model.EntregaModel.Pagamento;
 using EntregaTitulo.Services.Model.EntregaModel.PendenciaEntrega;
+using EntregaTitulo.Services.Model.HomeModel.EscalaModel;
 using EntregaTitulo.Services.Model.TituloModel.BaixaTitulo;
 using EntregaTitulo.Services.Model.TituloModel.TituloReceber;
 
@@ -64,6 +65,13 @@ namespace EntregaTitulo.Services.Mappings
                {
                    entity.DataTime = DateTime.Now;
                });
+            CreateMap<EscalaPostModel, Escala>()
+               .AfterMap((model, entity) =>
+               {
+                   entity.DataCadastro = DateTime.Now;
+
+
+               });
 
             CreateMap<Entrega, EntregaGetModel>();
             CreateMap<EntregaGetModel, Entrega>();
@@ -86,6 +94,10 @@ namespace EntregaTitulo.Services.Mappings
             CreateMap<BaixaTituloFuncionario, BaixaTituloFuncionarioGetModel>();
             CreateMap<TituloReceberFuncionario, TituloReceberFuncionarioGetModel>();
             CreateMap<TituloReceberFuncionarioGetModel, TituloReceberFuncionario>();
+
+            CreateMap<Escala, EscalaGetModel>();
+            CreateMap<EscalaGetModel, Escala>();
+
 
 
 

@@ -27,6 +27,8 @@ namespace EntregaTitulo.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new PagamentoMap());
             modelBuilder.ApplyConfiguration(new BaixaTituloReceberMap());
             modelBuilder.ApplyConfiguration(new TituloReceberMap());
+            modelBuilder.ApplyConfiguration(new TituloReceberFuncionarioMap());
+            modelBuilder.ApplyConfiguration(new EscalaMap());
 
         }
     }
